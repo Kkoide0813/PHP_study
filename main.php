@@ -1,24 +1,33 @@
 <?php
-// 論理演算子 英語が 80 点以上、なおかつ数学が 80 点以上だったら A 判定
-echo "English?";
-$english = (int)fgets(STDIN);
-echo "Math?";
-$math = (int)fgets(STDIN);
-
-// 読みづらい
-// if ($english >= 80) {
-//     if ($math >= 80) {
-//         echo "A" . PHP_EOL;
-//     }
-// } else echo "失格";
-
-if ($english >= 80 && $math >=80) { // && アンパサンド
-    echo "A";
+// 真偽値 true か false
+$isLoggedIn = false; // 真偽値
+if ($isLoggedIn) {
+    echo "User logged in" . PHP_EOL; // true
 } else {
-    echo "B";
+    echo "User not logged in" . PHP_EOL; // false
+}
+
+$isLoggedIn = "yes"; // 文字列→true
+if ($isLoggedIn) {
+    echo "User logged in" . PHP_EOL; // true
+} else {
+    echo "User not logged in" . PHP_EOL; // false
 }
 
 
+$isLoggedIn = ""; // 0, ""などはfalse
+if ($isLoggedIn) {
+    echo "User logged in" . PHP_EOL; // true
+} else {
+    echo "User not logged in" . PHP_EOL; // false
+}
+
 /* 
 実行時
+
+% php main.php
+User not logged in
+User logged in
+User not logged in
+
 */
