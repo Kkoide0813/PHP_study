@@ -1,32 +1,16 @@
 <?php
-echo "Your name?";
-// $name = fgets(STDIN);
+echo "Your name? => ";
 $name = trim(fgets(STDIN));
-// var_dump($name); // 変数nameの属性確認
-echo $name . PHP_EOL;
+// 文字列の連結
+echo "Hello {$name}" . PHP_EOL; 
+echo "Hello " . $name . PHP_EOL;
 
 /* 
-Taroの後にEnterキー押した分も文字数としてカウントされてしまう
+実行時
 
 % php main.php
-Your name?Taro
-string(5) "Taro
+Your name? => Taro
+Hello Taro
+Hello Taro
 
-=> そこで不要な値を除去するためにtrimを使用
-
-% php main.php
-Your name?Taro
-string(4) "Taro"
-
-4文字で正しく表示された
-
-% php main.php
-Your name?Taro
-Taro
-
-% php main.php
-Your name?Taro
-Taro
-% 
-
-" */
+*/
