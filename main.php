@@ -1,37 +1,34 @@
 <?php
-echo "Score? ";
-$score = (int) fgets(STDIN);
-if ($score >= 90) {
-    echo "A" . PHP_EOL;
-} else if ($score >=70){
-    echo "B" . PHP_EOL;
+echo "Signal? ";
+$signal = trim(fgets(STDIN));
+
+if($signal === "red"){
+    echo "Stop" . PHP_EOL;
+} else if ($signal === "green"){
+    echo "Go" . PHP_EOL;
+} else if ($signal === "yellow"){
+    echo "Slow down" . PHP_EOL;
 } else {
-    echo "C" . PHP_EOL;
+    echo "Wrong signal" . PHP_EOL;
 }
 
-// 上から順に判定されるため、以降は判定されないので注意
-
-
-
-// <?php
-// echo "Score? ";
-// $score = (int) fgets(STDIN);
-
-// if ($score >= 90) {
-//     echo "A" . PHP_EOL;
-// } else {
-//     echo "Not A" . PHP_EOL;
-// }
 
 /* 
 
 実行時
 
+% php main.php 
+Signal? green
+Go
 % php main.php
-Score? 95
-A
+Signal? yellow
+Slow down
 % php main.php
-Score? 80
-Not A
+Signal? red
+Stop
+% php main.php
+Signal? blue
+Wrong signal
+% 
 
 */
