@@ -1,12 +1,23 @@
 <?php
-echo "Your name" . PHP_EOL;
-$name = fgets(STDIN);
-echo "私の名前は{$name}です" . PHP_EOL;
+$name = $_POST['name'] ?? ''; // nameがなければ’’を使用
+?>
 
-/* ユーザーに文字列を入力し、変数で受け取ることができる　standard input 標準入力の略
-標準入力はターミナルで使用すると使える。VScodeのコンソールではxdebugのせいで使えない。
-% php main.php
-Your name
-小出
-私の名前は小出
-です */
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>入力フォーム</title>
+</head>
+
+<body>
+  <form method="post">
+    <label>お名前は: <input type="text" name="name"></label>
+    <button type="submit">送信</button>
+  </form>
+  <?php if ($name !== ''): ?>
+    <p>私の名前は <?= htmlspecialchars($name, ENT_QUOTES, 'UTF-8') ?> です。</p>
+  <?php endif; ?>
+</body>
+</html>
