@@ -1,21 +1,20 @@
 <?php
-// あらかじめ用意された関数 => ビルトイン関数
-// ユーザーが定義する関数 => ユーザー定義関数 
-
-function triple($num) { // 仮引数 param
-    return $num * 3;
+function sum($a, $b) {
+    return $a + $b;
 }
 
-echo triple(10) . PHP_EOL; // 実引数 args
-echo triple(4) * 3 . PHP_EOL; 
+function printSum($a, $b) {
+    echo $a + $b . PHP_EOL;
+}
 
-
+echo sum(3, 7) . PHP_EOL;
+printSum(10, 3);
 
 /* 
 実行時
 
-% php main.php                                                                    
-30
-36
+% php main.php
+10
+13
 
 */
