@@ -2,14 +2,20 @@
 echo "Signal? ";
 $signal = trim(fgets(STDIN));
 
-if($signal === "red"){
-    echo "Stop" . PHP_EOL;
-} else if ($signal === "green"){
-    echo "Go" . PHP_EOL;
-} else if ($signal === "yellow"){
-    echo "Slow down" . PHP_EOL;
-} else {
-    echo "Wrong signal" . PHP_EOL;
+switch ($signal) {
+    case "red":
+        echo "stop" . PHP_EOL;
+        break;
+    case "green":
+        echo "go" . PHP_EOL;
+        break;
+    case "yellow":
+        echo "slow down" . PHP_EOL;
+        break;
+    // どれにも当てはまらない時
+    default:
+        echo "wrong signal" . PHP_EOL;
+        break;
 }
 
 
@@ -17,18 +23,19 @@ if($signal === "red"){
 
 実行時
 
-% php main.php 
-Signal? green
-Go
-% php main.php
-Signal? yellow
-Slow down
-% php main.php
+
+koidekeiji@koidemegumitsugunoMacBook-Air htdocs % php main.php                                                                   
 Signal? red
-Stop
-% php main.php
-Signal? blue
-Wrong signal
+stop
+koidekeiji@koidemegumitsugunoMacBook-Air htdocs % php main.php
+Signal? green
+go
+koidekeiji@koidemegumitsugunoMacBook-Air htdocs % php main.php
+Signal? yellow
+slow down
+koidekeiji@koidemegumitsugunoMacBook-Air htdocs % php main.php
+Signal? aaa
+wrong signal
 % 
 
 */
