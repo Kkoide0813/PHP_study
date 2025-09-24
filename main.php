@@ -1,24 +1,58 @@
 <?php
-/*  変数のスコープ＝変数の有効範囲  */
+/*  関数の型付け  */
 
+// 厳格な型付けをする場合に書く
+// これを書くと、型エラーが見つかりやすくなる
+declare(strict_types=1);
 
-function triple($num) { // 関数の中・・・ローカルスコープ
-return $num * 3;
+// 返り値の型もコロンの後に指定できる。returnがない場合はvoidとする。
+function printInfo(string $name, int $score): void 
+{
+    echo var_dump($name, $score) . PHP_EOL; 
+    echo "{$name} : {$score}" . PHP_EOL;
 }
 
-function double($num) { // 関数tripleの仮引数$numとは同じ名前だが、スコープが違うので別のもの。
-    return $num * 2; 
-}
+printInfo("taro", 40); // string, int
+printInfo("taro", "jiro"); // おそらく型エラーになる
 
-echo triple(10) . PHP_EOL; // 30
-echo double(5) . PHP_EOL; // 10
+/* 
 
-$num = 20; // 関数の外・・・グローバルスコープ
-echo $num . PHP_EOL; // 20
+実行結果
+% php main.php
+string(4) "taro"
+int(40)
+
+taro : 40
+やはり、型エラーが発生。
+引数2のscoreがintじゃないといけないのに、stringが与えられていると出ている。
+PHP Fatal error:  Uncaught TypeError: printInfo(): Argument #2 ($score) must be of type int, string given, called in /Applications/MAMP/htdocs/main.php on line 9 and defined in /Applications/MAMP/htdocs/main.php:3
+
+*/
 
 
-// $triple = fn($num) => $num * 3;
-// $double = fn($num) => $num * 2;
+// function printInfo($name, $score) {
+//     echo var_dump($name, $score) . PHP_EOL; 
+//     echo "{$name} : {$score}" . PHP_EOL;
+// }
 
-// echo $triple(10) . PHP_EOL; // 30
-// echo $double(5) . PHP_EOL; // 10
+// printInfo("taro", 40); // string, int
+// printInfo("taro", "jiro"); // string, string
+
+/* 
+実行結果
+
+echo var_dump($name, $score) . PHP_EOL; 
+string(4) "taro" // name
+int(40).         // score
+
+echo "{$name} : {$score}" . PHP_EOL;
+taro : 40
+
+echo var_dump($name, $score) . PHP_EOL; 
+string(4) "taro" // name
+string(4) "jiro" // score  => string型に勝手に型付けされている。
+
+echo "{$name} : {$score}" . PHP_EOL;
+taro : jiro 
+
+*/
