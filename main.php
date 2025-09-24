@@ -1,46 +1,28 @@
 <?php
 
-/* 可読性・保守性の悪い以下のコードを関数でまとめる */
-// 広告
-echo "---------" . PHP_EOL;
-echo "SALE! 50% OFF!" . PHP_EOL;
-echo "---------" . PHP_EOL;
-// 本文
-echo "BREAKING NEWS!" . PHP_EOL;
-echo "Two baby pandas born at our Zoo!" . PHP_EOL;
-// 広告
-echo "---------" . PHP_EOL;
-echo "SALE! 50% OFF!" . PHP_EOL;
-echo "---------" . PHP_EOL;
+/* 無名関数（クロージャー）, アロー関数 */
 
+// function triple($num) {
+//     return $num * 3;
+// }
 
+// // 実引数
+// echo triple(10) . PHP_EOL;
 
-// 広告
-function showAd() { // 「ad」は、英語の略語で「advertisement（広告）｣
-    echo "---------" . PHP_EOL;
-    echo "SALE! 50% OFF!" . PHP_EOL;
-    echo "---------" . PHP_EOL;
-}
+// ============================
 
-// 本文
-function showContent() {
-    echo "BREAKING NEWS!" . PHP_EOL;
-    echo "Two baby pandas born at our Zoo!" . PHP_EOL;
-}
+// 無名関数という記法 関数名をそのまま変数として扱うことができる
+$triple = function($num) {
+    return $num * 3;
+}; // 無名関数＝クロージャーでは末尾にセミコロン ; が必要
 
-showAd(); // 広告
-showContent(); // 本文
-showAd(); // 広告
+// 実引数
+echo $triple(10) . PHP_EOL;
 
-/* 
+// ============================
+// アロー関数 無名関数をさらに省略して書くことが可能
+// 書き方・・・無名関数 => 戻り値
+$triple = fn ($num) => $num * 3;
 
----------
-SALE! 50% OFF!
----------
-BREAKING NEWS!
-Two baby pandas born at our Zoo!
----------
-SALE! 50% OFF!
----------
-
-*/
+// 実引数
+echo $triple(10) . PHP_EOL;
