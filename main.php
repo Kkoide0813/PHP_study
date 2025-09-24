@@ -1,19 +1,34 @@
 <?php
-/*  ?を使った型付け  */
+/*  データ構造編   */
+$scores = [70, 90, 80];
+echo $scores[0] . PHP_EOL; // 70
 
-// 厳格な型付け
-declare(strict_types=1);
+// 値の上書き
+$scores[1] = 95;
+echo $scores[1] . PHP_EOL; // 95
 
-// 商品idを渡すと、P-商品idという商品コードをかえす処理
-function getProductCode(int $id): ?string // NULL|string の簡略記法
-// function getProductCode(int $id): NULL|string
-{
-    // idが100以上ならNULLを返す
-    if($id >= 100) {
-        return var_dump(NULL);
-    }
-    return "P-{$id}";
+// 全ての値を表示
+print_r($scores) . PHP_EOL; // var_dumpより見やすい
+/* 
+Array
+(
+    [0] => 70
+    [1] => 95
+    [2] => 80
+)
+*/
+
+// var_dump($scores) . PHP_EOL;
+/* 
+
+見づらい
+
+array(3) {
+  [0]=>
+  int(70)
+  [1]=>
+  int(95)
+  [2]=>
+  int(80)
 }
-
-echo getProductCode(80) . PHP_EOL; // 商品コードを返す
-echo getProductCode(100) . PHP_EOL; // NULL
+*/
