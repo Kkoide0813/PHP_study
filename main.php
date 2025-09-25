@@ -1,17 +1,30 @@
 <?php
-/* array_spliceの使い方 任意の位置で配列を操作する方法 */
-// array_splice($配列, $開始位置, $削除する要素の数 , $置き換える要素を含んだ配列 );
-
-
+/* 配列の並び替え sort(), rsort(), asort(), array_reverse() */
 $scores = [70, 90, 80];
-array_splice($scores, 1, 0, [30, 20]);   // 70, 30, 20, 90, 80
-array_splice($scores, 2, 1);             // 70, 30, 90, 80
-$removedItems = array_splice($scores, 1, 1, [10, 15]);   // 70, 10, 15, 90, 80
 
-print_r($scores); // 70, 10, 15, 90, 80
-print_r($removedItems); // 30 array_splice関数は削除された値を戻り値として返す
+// echo "配列の並べ替え 小さい順 sort()" . PHP_EOL;
+// sort($scores); 
+// print_r($scores);
+
+// echo "配列の並べ替え 大きい順 rsort()" . PHP_EOL;
+// rsort($scores);
+// print_r($scores);
+
+// echo "元の配列のキーを維持したまま並び替え asort()" . PHP_EOL;
+// asort($scores);
+// print_r($scores);
+
+// echo " シャッフル shuffle()" . PHP_EOL; // 実行されるたびにシャッフルされる
+// shuffle($scores);
+// print_r($scores);
+
+echo " 要素を逆順に並べ替え array_reverse()" . PHP_EOL;
+
+array_reverse($scores); // array_reverse()元の配列をそのままの状態で、”戻り値で”逆にした新たな配列を返す
+print_r(array_reverse($scores));
+// $reversed = array_reverse($scores); // 変数に代入してリファクタリング
+// print_r($reversed);
 
 
-// 配列の指定のインデックスの要素を削除
-
-// 配列の指定のインデックスに要素を追加
+// array_reverse($scores); // これだと元の配列がそのまま出力される
+// print_r($scores);
