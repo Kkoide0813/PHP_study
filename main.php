@@ -1,11 +1,65 @@
 <?php
-/*  配列の調べ方 */
-$names = ["Taro","Jiro" ,"Saburo"];
+/*  配列の要素を追加 */
 
-// 関数in_array() 一致する文字列を検索
-var_dump(in_array("Taro", $names)); // 存在する true
-var_dump(in_array("shiro", $names)); // 存在しない false
+$scores = [70, 90, 80];
+$scores[] = 60; // 末尾に要素を追加
 
-// array_search() 何番目に存在するか検索
-echo array_search("Jiro", $names) . PHP_EOL; // 1
+// 配列$moreScoresに$scoresの要素を続けて入れたい [10, 20, 30, 70, 90, 80 ]
+$moreScores = [10, 20, 30, ...$scores]; // ... 配列の前にピリオドを3つつける
+$moreScores = [10, 20, ...$scores , 30]; 
 
+// echo count($moreScores) . PHP_EOL;
+// echo array_sum($moreScores) . PHP_EOL;
+
+print_r($moreScores);
+/* 
+Array
+(
+    [0] => 10
+    [1] => 20
+    [2] => 30
+    [3] => 70
+    [4] => 90
+    [5] => 80
+    [6] => 60
+)
+
+*/
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+// $scores = [70, 90, 80];
+// $scores[] = 60; // 末尾に要素を追加
+
+// // 配列$moreScoresに$scoresの要素を続けて入れたい [10, 20, 30, 70, 90, 80 ]
+// $moreScores = [10, 20, 30, $scores];
+// /* Array
+// (
+//     [0] => 10
+//     [1] => 20
+//     [2] => 30
+//     [3] => Array
+//         (
+//             [0] => 70
+//             [1] => 90
+//             [2] => 80
+//             [3] => 60 配列番号[3]の中身が配列になってしまう。
+//         )
+
+// ) */
+
+// print_r($moreScores);
+
+// ==================================
+// $scores = [70, 90, 80];
+// $scores[] = 60; // 末尾に要素を追加
+
+// print_r($scores);
+
+// /*                                                                               
+// Array
+// (
+//     [0] => 70
+//     [1] => 90
+//     [2] => 80
+//     [3] => 60
+// )
+// */
