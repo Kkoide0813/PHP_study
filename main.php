@@ -1,35 +1,24 @@
 <?php
-/* 各スコアをそれぞれ5点プラスしたい */
+// /* キーが文字列の配列 */
+$scores = ["english" => 70, "math" => 80];
+$scores["math"] = 90;
+echo $scores["math"] . PHP_EOL;
 
-/* 
-条件を満たす要素だけ抽出し、新しい配列を作る方法
-*/
+$scores["history"] = 50;
+print_r ($scores);
 
-/* 
-array_filter($scores, 関数)
-$scoresの各要素を関数の引数として渡して、
-true として判定された要素だけを抽出して、新しい配列を作って返してくれる
-*/
+/* キーに対する処理 */
+$scores = ["english" => 70, "math" => 80, "history" =>50];
+print_r(array_keys($scores)); // キーだけを抽出する方法
+print_r(array_values($scores)); // 要素だけを抽出する方法
 
-// 関数 50以上だけ抽出
-$getOver50 = function($n){
-    return $n >=50;
-    // echo $n . var_dump($n >=50) . PHP_EOL;
-};
 
-$scores = [70, 90, 80, 40, 60, 10];
-$filteredScores = array_filter($scores, $getOver50);
-print_r($filteredScores);
+var_dump(array_key_exists("english", $scores)); // キーにenglishが含まれているか検索 戻り値はtrue,false
+// var_dump(in_array("english", $scores)); // in_arrayはキーではなく、要素の検索に使うためfalseになる
 
-// // アロー関数で省略
-// $getOver50 = fn($n) => $n >= 50; // 関数
+// キーを元に並べ替え 
+ksort($scores);
+print_r($scores);
 
-// $scores = [70, 90, 80, 40, 60, 10];
-// $filteredScores = array_filter($scores, $getOver50);
-// print_r($filteredScores);
-
-// // アロー関数の中身だけ書いて省略
-// $scores = [70, 90, 80, 40, 60, 10];
-// $filteredScores = array_filter($scores, fn($n) => $n >= 50);
-
-// print_r($filteredScores);
+krsort($scores);
+print_r($scores);
