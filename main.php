@@ -2,38 +2,34 @@
 /* 各スコアをそれぞれ5点プラスしたい */
 
 /* 
-foreachで空の配列に入れる方法
-*/ 
-
-$scores = [70, 80, 90];
-$updatedScores = [];
-
-foreach($scores as $value){
-    $updatedScores[] = $value + 5; // 配列の末尾に追加する書き方
-}
-
-print_r($updatedScores);
-
-// =======================================================
-
-/* 
-array_map(関数, $scores) を使う方法
+条件を満たす要素だけ抽出し、新しい配列を作る方法
 */
 
-// 関数addFiveを変数$addFiveとして呼び出したいので、呼び出し元は無名関数を使わないといけない。
-$scores = [70, 80, 90];
-$addFive = function($n){
-        return $n + 5;
-    };
+/* 
+array_filter($scores, 関数)
+$scoresの各要素を関数の引数として渡して、
+true として判定された要素だけを抽出して、新しい配列を作って返してくれる
+*/
 
-$updatedScores = array_map($addFive, $scores);
-print_r($updatedScores);
+// 関数 50以上だけ抽出
+$getOver50 = function($n){
+    return $n >=50;
+    // echo $n . var_dump($n >=50) . PHP_EOL;
+};
 
-// =======================================================
-//もっと短くアロー関数で書くことも可能
-$addFive = fn($n) => $n + 5;
-$scores = [70, 80, 90];
+$scores = [70, 90, 80, 40, 60, 10];
+$filteredScores = array_filter($scores, $getOver50);
+print_r($filteredScores);
 
-// $updatedScores = array_map($addFive, $scores);
-$updatedScores = array_map(fn($n) => $n + 5, $scores); // アロー関数の処理を直接書いた場合
-print_r($updatedScores);
+// // アロー関数で省略
+// $getOver50 = fn($n) => $n >= 50; // 関数
+
+// $scores = [70, 90, 80, 40, 60, 10];
+// $filteredScores = array_filter($scores, $getOver50);
+// print_r($filteredScores);
+
+// // アロー関数の中身だけ書いて省略
+// $scores = [70, 90, 80, 40, 60, 10];
+// $filteredScores = array_filter($scores, fn($n) => $n >= 50);
+
+// print_r($filteredScores);
