@@ -1,25 +1,22 @@
 <?php
-/* 配列の要素を変数に代入 */
-$scores = [70, 90, 80];
+/* 配列の要素を変数に代入_2 foreach(配列変数 as 変数) */
+$scores = [70, 80, 90];
+// foreach($scores as $value) {
+//     echo "Score: {$value}" . PHP_EOL; 
+// }
 
-$firstScore = $scores[0];
-$secondScore = $scores[1];
-$thirdScore = $scores[2];
+/* 
+Score: 70
+Score: 80
+Score: 90
+*/
 
-// 冗長な書き方
-echo $firstScore . PHP_EOL;
-echo $secondScore . PHP_EOL;
-echo $thirdScore . PHP_EOL;
+foreach($scores as $key => $value) { // 値だけでなく、キーも取り出す方法
+    echo "Score[{$key}]: {$value}" . PHP_EOL;
+}
 
-// 別の書き方
-list($firstScore, $secondScore, $thirdScore) = $scores; // list()内の変数にそれぞれ代入できる
-echo $firstScore . PHP_EOL;
-echo $secondScore . PHP_EOL;
-echo $thirdScore . PHP_EOL;
-
-// 別の書き方
-[$firstScore, $secondScore, $thirdScore] = $scores; // [ ]は配列ではない
-echo $firstScore . PHP_EOL;
-echo $secondScore . PHP_EOL;
-echo $thirdScore . PHP_EOL;
-
+/* 
+Score[0]: 70
+Score[1]: 80
+Score[2]: 90
+*/
