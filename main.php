@@ -1,24 +1,21 @@
 <?php
-// /* キーが文字列の配列 */
-$scores = ["english" => 70, "math" => 80];
-$scores["math"] = 90;
-echo $scores["math"] . PHP_EOL;
+/* クラス */
 
-$scores["history"] = 50;
-print_r ($scores);
+class User {
+    // プロパティ
+    public $name;
+    public $score;
+}
 
-/* キーに対する処理 */
-$scores = ["english" => 70, "math" => 80, "history" =>50];
-print_r(array_keys($scores)); // キーだけを抽出する方法
-print_r(array_values($scores)); // 要素だけを抽出する方法
+// インスタンス
+$user1 = new User();
+$user1 -> name = "Taro";
+$user1 -> score = 70;
+$user2 = new User();
+$user2 -> name = "Jiro";
+$user2 -> score = 90;
 
-
-var_dump(array_key_exists("english", $scores)); // キーにenglishが含まれているか検索 戻り値はtrue,false
-// var_dump(in_array("english", $scores)); // in_arrayはキーではなく、要素の検索に使うためfalseになる
-
-// キーを元に並べ替え 
-ksort($scores);
-print_r($scores);
-
-krsort($scores);
-print_r($scores);
+echo $user1 -> name . PHP_EOL;
+echo $user1 -> score . PHP_EOL;
+echo $user2 -> name . PHP_EOL;
+echo $user2 -> score . PHP_EOL;
