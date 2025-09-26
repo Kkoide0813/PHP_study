@@ -1,5 +1,5 @@
 <?php
-// 科目を増やす
+// 点数に応じた判定結果を表示させる
 class User {
 
     private $name;
@@ -27,9 +27,12 @@ class Score {
         $this->subject = $subject;
         $this->points = $points;
     }
+    private function getResult(){
+        return $this->points >= 80 ? "Pass" : "Fail" ;
+    }
 
     public function getInfo(){
-        return "{$this->subject},{$this->points}";
+        return "{$this->subject},{$this->points},{$this->getResult()}";
     }
 }
 
