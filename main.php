@@ -13,6 +13,10 @@ class User {
         $this -> name = $name;
         $this -> score = $score;
     }
+
+    public function getInfo(){
+        return "{$this -> name}, {$this -> score}";
+    }
 }
 
 // インスタンス
@@ -20,7 +24,5 @@ class User {
 $user1 = new User("Taro", 70);
 $user2 = new User("Jiro", 90);
 
-echo $user1 -> name . PHP_EOL;
-echo $user1 -> score . PHP_EOL;
-echo $user2 -> name . PHP_EOL;
-echo $user2 -> score . PHP_EOL;
+echo $user1->getInfo() . PHP_EOL;
+echo $user2->getInfo() . PHP_EOL;
