@@ -1,6 +1,4 @@
 <?php
-// クラスの継承 ScoreクラスをMathScore, EnglishScoreクラスに分ける
-// アクセス修飾子protected 継承関係にある子クラスでも使えるようにする
 class User {
 
     private $name;
@@ -21,14 +19,14 @@ class User {
 class Score {
 
     private $subject;
-    private $points;
+    protected $points;
 
     public function __construct($subject, $points)
     {
         $this->subject = $subject;
         $this->points = $points;
     }
-    private function getResult(){ // 点数による判定
+    protected function getResult(){ // 点数による判定
         return $this->points >= 80 ? "Pass" : "Fail" ;
     }
 
@@ -42,12 +40,25 @@ class MathScore extends Score{
     {
         parent::__construct("Math", $points); // 親クラスのメソッドは parent::メソッド名() で繋げられる
     }
+
+    // 子クラスの方で親クラスと同じ名前のメソッドを上書きすることを「メソッドのオーバーライド」と呼びます。
+    protected function getResult() // 点数による判定
+    {
+        echo "MathScore method" . PHP_EOL; // 小クラスのメソッドが優先されたか確認
+        return $this->points >= 50 ? "Pass" : "Fail"; 
+    }
 }
 
 class EnglishScore extends Score{
     public function __construct($points)
     {
         parent::__construct("English", $points);
+    }
+
+    protected function getResult() // 点数による判定
+    {
+        echo "EnglishScore method" . PHP_EOL; // 小クラスのメソッドが優先されたか確認
+        return $this->points >= 95 ? "Pass" : "Fail";
     }
 }
 
@@ -57,3 +68,14 @@ $user2 = new User("Jiro", new EnglishScore(90));
 
 echo $user1->getInfo() . PHP_EOL;
 echo $user2->getInfo() . PHP_EOL;
+
+/* 
+
+オーバーライドできてることが確認
+
+MathScore method
+Taro,Math,70,Pass
+EnglishScore method
+Jiro,English,90,Fail
+
+*/
