@@ -1,5 +1,6 @@
 <?php
-// 点数に応じた判定結果を表示させる
+// クラスの継承 ScoreクラスをMathScore, EnglishScoreクラスに分ける
+// アクセス修飾子protected 継承関係にある子クラスでも使えるようにする
 class User {
 
     private $name;
@@ -27,17 +28,32 @@ class Score {
         $this->subject = $subject;
         $this->points = $points;
     }
-    private function getResult(){
+    private function getResult(){ // 点数による判定
         return $this->points >= 80 ? "Pass" : "Fail" ;
     }
 
-    public function getInfo(){
+    public function getInfo(){ // 科目, 点数, 点数による判定
         return "{$this->subject},{$this->points},{$this->getResult()}";
     }
 }
 
-$user1 = new User("Taro", new Score("Math", 70));
-$user2 = new User("Jiro", new Score("Engllish", 90));
+class MathScore extends Score{
+    public function __construct($points)
+    {
+        parent::__construct("Math", $points); // 親クラスのメソッドは parent::メソッド名() で繋げられる
+    }
+}
+
+class EnglishScore extends Score{
+    public function __construct($points)
+    {
+        parent::__construct("English", $points);
+    }
+}
+
+
+$user1 = new User("Taro", new MathScore(70));
+$user2 = new User("Jiro", new EnglishScore(90));
 
 echo $user1->getInfo() . PHP_EOL;
 echo $user2->getInfo() . PHP_EOL;
