@@ -1,28 +1,40 @@
 <?php
-// クラスプロパティ
+// 科目を増やす
 class User {
 
-    public $name;
-    public $score;
-    private static $count = 0; // インスタンスの作成回数
+    private $name;
+    private $score;
 
     public function __construct($name, $score)
     {
         $this -> name = $name;
         $this -> score = $score;
-        User::$count++;
+    }
+    
+    public function getInfo(){
+        return "{$this->name},{$this->score->getInfo()}"; // $score = new Score("Math", 70) なので、Score型のオブジェクト
     }
 
-    // 個々のインスタンスに紐づかないように、staticメソッドにする
-    public static function getUserCount(){
-        return User::$count;
+}
+
+class Score {
+
+    private $subject;
+    private $points;
+
+    public function __construct($subject, $points)
+    {
+        $this->subject = $subject;
+        $this->points = $points;
+    }
+
+    public function getInfo(){
+        return "{$this->subject},{$this->points}";
     }
 }
 
-$user1 = new User("Taro", 70);
-$user2 = new User("Jiro", 90);
+$user1 = new User("Taro", new Score("Math", 70));
+$user2 = new User("Jiro", new Score("Engllish", 90));
 
-// User::$count++; // インスタンス化せずにカウントされてしまう。クラス外でカウントできないようにする。
-// echo User::$count . PHP_EOL; // $countをprivateにするとこっちもエラーが出てしまう。getterを設定する
-
-echo User::getUserCount() . PHP_EOL; // staticメソッドの呼び出し方
+echo $user1->getInfo() . PHP_EOL;
+echo $user2->getInfo() . PHP_EOL;
