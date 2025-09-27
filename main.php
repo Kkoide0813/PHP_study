@@ -1,9 +1,10 @@
 <?php
-class User {
 
+class User {
+    
     private $name;
     private $score;
-
+    
     public function __construct($name, $score)
     {
         $this -> name = $name;
@@ -13,11 +14,15 @@ class User {
     public function getInfo(){
         return "{$this->name},{$this->score->getInfo()}"; // $score = new Score("Math", 70) なので、Score型のオブジェクト
     }
-
+    
 }
 
-class Score {
-
+/* 
+abstract
+小クラス側で上書き（オーバーライド）されることを前提としたメソッドであることを明示する
+*/
+abstract class Score { // abstractをつける
+    
     private $subject;
     protected $points;
 
@@ -26,9 +31,8 @@ class Score {
         $this->subject = $subject;
         $this->points = $points;
     }
-    protected function getResult(){ // 点数による判定
-        return $this->points >= 80 ? "Pass" : "Fail" ;
-    }
+    // 抽象メソッドと呼ぶ。abstractをつけることで小クラス側で実装してねという意味 インスタンスは作れない
+    abstract protected function getResult(); 
 
     public function getInfo(){ // 科目, 点数, 点数による判定
         return "{$this->subject},{$this->points},{$this->getResult()}";
@@ -41,10 +45,9 @@ class MathScore extends Score{
         parent::__construct("Math", $points); // 親クラスのメソッドは parent::メソッド名() で繋げられる
     }
 
-    // 子クラスの方で親クラスと同じ名前のメソッドを上書きすることを「メソッドのオーバーライド」と呼びます。
     protected function getResult() // 点数による判定
     {
-        echo "MathScore method" . PHP_EOL; // 小クラスのメソッドが優先されたか確認
+        echo "MathScore method" . PHP_EOL;
         return $this->points >= 50 ? "Pass" : "Fail"; 
     }
 }
