@@ -1,19 +1,16 @@
 <?php
-// クラス名の重複を避けるために名前空間で呼び出す
-namespace Dotinstall\MyApp;
-
 class User
 {
-    private $name;
-    private $score;
+    private String $name;
+    private Score $score; // 親クラスを指定すればOK
 
-    public function __construct($name, $score)
+    public function __construct(string $name, Score $score) 
     {
         $this->name = $name;
         $this->score = $score;
     }
 
-    public function getInfo()
+    public function getInfo():string
     {
         return "{$this->name},{$this->score->getInfo()}"; // $score = new Score("Math", 70) なので、Score型のオブジェクト
     }
