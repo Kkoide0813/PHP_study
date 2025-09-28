@@ -1,18 +1,23 @@
 <?php
 
 /* 
-インターフェース
-・継承関係のない任意のクラスに対して処理を強制できる
-・チーム開発の際に実装漏れを防ぐことができる
+トレイト
+インターフェースと異なり、処理を含めることができる。
+異なるクラスで共通の処理をまとめたい時に便利な機能。
+異なる処理の場合は、インターフェースか継承が最適
 */
 
-// 先頭は大文字 ~ableという名前をつけることが多い
-interface Loggable{
-    public function log(); // 抽象メソッド
+// Score, Userクラスでインスタンス生成時に共通のメッセージを表示したい
+trait Loggable{
+    public function log(){
+        echo "Instance created" . PHP_EOL;
+    }
 }
 
 
-abstract class Score implements Loggable{  // implements インターフェース名
+abstract class Score { 
+    use Loggable; // use トレイト名; 
+
     private $subject;
     protected $points;
     
@@ -20,12 +25,7 @@ abstract class Score implements Loggable{  // implements インターフェー�
     {
         $this->subject = $subject;
         $this->points = $points;
-        $this->log(); // インスタンス生成時にlog()が呼ばれる
-    }
-
-    // メッセージを表示する処理
-    public function log(){ // 抽象メソッドの中身
-        echo "Instance created: {$this->subject}" . PHP_EOL;
+        $this->log(); // traitが呼ばれる
     }
 
     abstract protected function getResult(); 
@@ -61,8 +61,9 @@ class EnglishScore extends Score{
     }
 }
 
-class User implements Loggable{
-    
+class User {
+    use Loggable;
+
     private $name;
     private $score;
     
@@ -71,12 +72,6 @@ class User implements Loggable{
         $this -> name = $name;
         $this -> score = $score;
         $this -> log();
-    }
-
-    // メッセージを表示する処理
-    public function log()
-    { // 抽象メソッドの中身
-        echo "Instance created: {$this->name}" . PHP_EOL;
     }
 
     public function getInfo(){
@@ -92,10 +87,10 @@ echo $user1->getInfo() . PHP_EOL;
 echo $user2->getInfo() . PHP_EOL;
 
 /* 
-Instance created: Math
-Instance created: Taro
-Instance created: English
-Instance created: Jiro
+Instance created
+Instance created
+Instance created
+Instance created
 MathScore method
 Taro,Math,70,Pass
 EnglishScore method
