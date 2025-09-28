@@ -1,4 +1,7 @@
 <?php
+// クラス名の重複を避けるために名前空間で呼び出す
+namespace Dotinstall\MyApp;
+
 class User
 {
     private $name;
